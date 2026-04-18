@@ -1,36 +1,229 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ilyas.dev — Портфолио Full Stack Разработчика
 
-## Getting Started
+Современный, отзывчивый портфолио-сайт, построенный с использованием **Next.js 16**, **TypeScript** и **TailwindCSS**. Демонстрирует мои проекты, статьи и опыт в веб-разработке.
 
-First, run the development server:
+## 🌟 Особенности
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **📱 Полная мобильная адаптивность** — оптимизировано для всех устройств (мобильные, планшеты, десктопы)
+- **⚡ Высокая производительность** — построено на Next.js с Turbopack для быстрой загрузки
+- **🎨 Современный дизайн** — кремово-бежевая палитра (#FAF7F2) с тёплым коралловым акцентом (#ff8d78)
+- **♿ Доступность** — ARIA метки, сенсорные цели 44x44px, поддержка prefers-reduced-motion
+- **🔄 Интерактивные компоненты** — плавные анимации, hover эффекты, динамический скроллинг
+- **📝 Управление контентом** — легко добавлять новые проекты и статьи
+- **🔗 SEO оптимизированно** — статические мета-теги, правильная структура HTML
+
+## 🛠️ Технологический стек
+
+| Область | Технология |
+|---------|-----------|
+| **Фреймворк** | Next.js 16.2.4 с Turbopack |
+| **Язык** | TypeScript |
+| **Стили** | TailwindCSS + CSS Modules |
+| **Иконки** | lucide-react |
+| **Шрифты** | DM Serif Display, DM Sans, DM Mono |
+| **Состояние** | React Hooks (useState, useEffect) |
+
+## 📁 Структура проекта
+
+```
+salimov/
+├── app/
+│   ├── globals.css              # Глобальные стили и CSS переменные
+│   ├── layout.tsx               # Корневой layout с Navbar и Footer
+│   ├── page.tsx                 # Главная страница
+│   ├── portfolio/               # Страницы портфолио
+│   │   ├── page.tsx             # Список проектов
+│   │   ├── [id]/page.tsx        # Детальная страница проекта
+│   │   ├── portfolio.css        # Стили портфолио
+│   │   └── project-detail.css   # Стили деталей проекта
+│   ├── articles/                # Раздел статей
+│   ├── about/                   # Страница обо мне
+│   ├── contact/                 # Контакты
+│   └── api/                     # API маршруты (если требуются)
+├── components/
+│   ├── Navbar.tsx               # Навигационная панель (адаптивная)
+│   ├── Navbar.module.css        # Стили навбара
+│   ├── Footer.tsx               # Подвал (адаптивный)
+│   ├── Footer.module.css        # Стили футера
+│   ├── ProjectCard.tsx          # Карточка проекта
+│   └── ...другие компоненты
+├── lib/
+│   └── data.ts                  # Функции получения данных
+├── types/
+│   ├── product.ts               # Типы проектов
+│   └── blog.ts                  # Типы статей
+├── public/                      # Статические файлы
+│   ├── img/                     # Изображения
+│   ├── icons/                   # Иконки
+│   └── fonts/                   # Шрифты
+└── data/
+    └── products.json            # Данные проектов
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Быстрый старт
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Предварительные требования
+- Node.js 18+ 
+- npm или yarn
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Установка
 
-## Learn More
+```bash
+# Клонируем репозиторий
+git clone https://github.com/maoroch/portfolio-page.git
+cd portfolio-page
 
-To learn more about Next.js, take a look at the following resources:
+# Устанавливаем зависимости
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Разработка
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Запускаем dev-сервер
+npm run dev
+```
 
-## Deploy on Vercel
+Откройте [http://localhost:3000](http://localhost:3000) в браузере. Страница будет автоматически перезагружаться при изменении файлов.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Продакшн сборка
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Создаём оптимизированную сборку
+npm run build
+
+# Запускаем продакшн версию
+npm run start
+```
+
+## 🎨 Цветовая палитра
+
+```css
+--bg: #FAF7F2              /* Основной фон - кремово-бежевый */
+--bg-2: #F5F0E8            /* Вторичный фон */
+--bg-3: #EFE8DE            /* Третичный фон */
+--text: #4a4541            /* Основной текст - тёмный коричневый */
+--text-muted: #8b8076      /* Приглушённый текст */
+--text-subtle: #b5a89a     /* Очень светлый текст */
+--accent: #ff8d78          /* Акцент - тёплый коралл */
+--green: #7a9e8f           /* Дополнительный зелёный */
+```
+
+## 📱 Адаптивность
+
+Сайт оптимизирован для всех размеров экранов:
+- **Мобильные** (< 640px) — компактный layout, hamburger меню
+- **Планшеты** (640-1023px) — средняя навигация
+- **Десктоп** (≥ 1024px) — полноценная панель навигации
+
+### Брейкпоинты
+- Переключение на мобильное меню: `1024px`
+- Responsive типография: `clamp()` функции
+- Динамическое отступы и размеры
+
+## 🎯 Ключевые компоненты
+
+### Navbar
+- Динамический скроллинг (меняет стиль при прокрутке)
+- Адаптивное меню (горизонтальное на десктопе, hamburger на мобилке)
+- Плавные анимации и hover эффекты
+
+### Footer
+- Брендинг и навигация
+- Социальные ссылки с интерактивными эффектами
+- Мобильная и десктопная версии
+
+### Portfolio
+- Список проектов с фильтрацией
+- Детальные страницы каждого проекта
+- Responsive grid/flex layouts
+- Sticky фильтры на мобилке
+
+## 📝 Добавление новых проектов
+
+1. Откройте `data/products.json`
+2. Добавьте новый объект проекта:
+
+```json
+{
+  "id": "my-project",
+  "title": "Название проекта",
+  "description": "Описание",
+  "image": "/img/project.jpg",
+  "category": "Web",
+  "link": "https://...",
+  "github": "https://...",
+  "tags": ["React", "TypeScript", "TailwindCSS"]
+}
+```
+
+3. Проект автоматически появится в портфолио
+
+## 🔍 SEO
+
+- Динамические мета-теги для каждой страницы
+- OpenGraph теги для соцсетей
+- Sitemap и robots.txt
+- Оптимизированная структура HTML
+
+## ♿ Доступность
+
+- Семантический HTML
+- ARIA метки для интерактивных элементов
+- Сенсорные цели минимум 44x44px
+- Поддержка `prefers-reduced-motion`
+- Достаточный контраст цветов (WCAG AA)
+
+## 📈 Производительность
+
+- Next.js Image оптимизация
+- CSS-in-JS с Server Components
+- Lazy loading для изображений
+- Минимизированный бандл
+- Оптимизированные анимации (GPU-accelerated)
+
+## 🌐 Развёртывание
+
+### Vercel (рекомендуется)
+```bash
+npm install -g vercel
+vercel
+```
+
+### Docker
+
+```bash
+docker build -t portfolio .
+docker run -p 3000:3000 portfolio
+```
+
+### GitHub Pages / Netlify
+
+Следуйте инструкциям Next.js для статического экспорта.
+
+## 📚 Дополнительные документы
+
+- [`NAVBAR_RESPONSIVE_DOCS.md`](./components/NAVBAR_RESPONSIVE_DOCS.md) — документация Navbar
+- [`PORTFOLIO_MOBILE_IMPROVEMENTS.md`](./components/PORTFOLIO_MOBILE_IMPROVEMENTS.md) — оптимизация портфолио
+- [`FOOTER_DOCUMENTATION.md`](./components/FOOTER_DOCUMENTATION.md) — документация Footer
+
+## 🤝 Контакты
+
+- 📧 Email: hello@Ilyas.dev
+- 🐙 GitHub: [@maoroch](https://github.com/maoroch)
+- 💼 LinkedIn: [Ilyas](https://linkedin.com)
+- 📱 Telegram: [@ilyasdev](https://t.me)
+
+## 📄 Лицензия
+
+Проект лицензирован под MIT лицензией. Смотрите файл `LICENSE` для деталей.
+
+## 🙏 Благодарности
+
+- [Next.js](https://nextjs.org) — отличный React фреймворк
+- [TailwindCSS](https://tailwindcss.com) — для стилизации
+- [lucide-react](https://lucide.dev) — красивые иконки
+
+---
+
+**Последнее обновление**: апрель 2026 | **Версия**: 1.0.0
