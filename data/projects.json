@@ -1,0 +1,47 @@
+[
+  {
+    "id": "crm-platform",
+    "title": "CRM Platform Architecture",
+    "subtitle": "Enterprise-grade CRM from scratch for a logistics company",
+    "problem": "The client was using 4 disconnected tools — Excel, Telegram, a custom PHP legacy system, and Google Sheets — resulting in data loss, missed deals, and 3+ hours of manual work daily.",
+    "solution": "Designed and built a unified CRM with deal pipelines, client cards, task automation, and a real-time notification system. Integrated with existing Telegram bot flow and internal API.",
+    "stack": ["Next.js", "Node.js", "PostgreSQL", "Prisma", "Redis", "Tailwind CSS", "Socket.io"],
+    "architecture": "Modular monolith on the backend with clear domain separation (deals, clients, users, notifications). REST API + WebSockets for real-time updates. Frontend on Next.js App Router with server components for heavy data views.",
+    "result": "Reduced manual data entry by 80%. Deal close rate improved 23% due to pipeline visibility. Team onboarded in 2 days with no training — the UX was that intuitive.",
+    "category": "crm",
+    "featured": true,
+    "year": 2024,
+    "tags": ["CRM", "Architecture", "Full Stack", "PostgreSQL", "Real-time"],
+    "image": null
+  },
+  {
+    "id": "ai-content-pipeline",
+    "title": "AI Content Pipeline",
+    "subtitle": "Automated content generation and distribution system",
+    "problem": "A media startup needed to produce 50+ localized articles per week across 3 languages. Manual writing was costing $8,000/month and taking 2 weeks per cycle.",
+    "solution": "Built an AI-powered pipeline: topic clustering → LLM drafting (GPT-4) → human-in-loop editing interface → one-click multi-channel publishing to CMS, Telegram, and LinkedIn API.",
+    "stack": ["Next.js", "OpenAI API", "Node.js", "Express", "MongoDB", "Bull Queue", "Telegram Bot API"],
+    "architecture": "Queue-based processing with Bull + Redis. Each article goes through stages: draft → review → publish. Admin dashboard shows pipeline state in real-time. LLM prompts are versioned in DB for A/B testing.",
+    "result": "Content production cost dropped from $8K to $1.2K/month. Output increased 3x. Time-to-publish went from 14 days to 48 hours.",
+    "category": "ai",
+    "featured": true,
+    "year": 2024,
+    "tags": ["AI", "LLM", "Automation", "Content", "Pipeline"],
+    "image": null
+  },
+  {
+    "id": "performance-optimization",
+    "title": "Frontend Performance Overhaul",
+    "subtitle": "From 34 to 96 Lighthouse score on a high-traffic e-commerce site",
+    "problem": "An e-commerce client had a Next.js site with Lighthouse score of 34. Pages took 8+ seconds to load on mobile. Bounce rate was 71%. Google Ads ROAS was tanking due to poor Core Web Vitals.",
+    "solution": "Full audit and rebuild of rendering strategy. Moved from CSR to SSR/ISR hybrid. Implemented image optimization pipeline, critical CSS extraction, font subsetting, and aggressive caching headers.",
+    "stack": ["Next.js", "Vercel", "Sharp", "Webpack", "Lighthouse CI"],
+    "architecture": "ISR for product pages (revalidate: 60s), SSR for cart/auth, static for marketing pages. CDN-level caching with stale-while-revalidate. Custom image optimization loader. Bundle analyzer integrated in CI.",
+    "result": "Lighthouse: 34 → 96. LCP: 8.2s → 1.4s. Bounce rate: 71% → 38%. Google Ads ROAS improved 2.4x within 30 days of launch.",
+    "category": "frontend",
+    "featured": true,
+    "year": 2023,
+    "tags": ["Performance", "Next.js", "SSR", "ISR", "Core Web Vitals"],
+    "image": null
+  }
+]
