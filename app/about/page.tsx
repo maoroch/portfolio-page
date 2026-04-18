@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import styles from "./about.module.css";
 
 export const metadata: Metadata = {
   title: "About",
@@ -27,17 +28,7 @@ export default function AboutPage() {
   return (
     <div style={{ paddingTop: 60 }}>
       {/* Hero */}
-      <section
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "80px 24px 64px",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 80,
-          alignItems: "start",
-        }}
-      >
+      <section className={styles.heroSection}>
         <div>
           <p
             style={{
@@ -51,16 +42,7 @@ export default function AboutPage() {
           >
             About
           </p>
-          <h1
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: "clamp(36px, 5vw, 60px)",
-              color: "var(--text)",
-              letterSpacing: "-0.02em",
-              marginBottom: 28,
-              lineHeight: 1.1,
-            }}
-          >
+          <h1 className={styles.heroTitle}>
             I build things
             <br />
             <span style={{ color: "var(--text-muted)", fontStyle: "italic" }}>that work.</span>
@@ -97,15 +79,8 @@ export default function AboutPage() {
         </div>
 
         {/* Right column: current focus */}
-        <div style={{ paddingTop: 8 }}>
-          <div
-            style={{
-              border: "1px solid var(--border)",
-              padding: "28px",
-              marginBottom: 2,
-              backgroundColor: "var(--bg-2)",
-            }}
-          >
+        <div className={styles.sideboxesContainer}>
+          <div className={styles.sidebox}>
             <p
               style={{
                 fontFamily: "'DM Mono', monospace",
@@ -126,31 +101,15 @@ export default function AboutPage() {
                 "Frontend performance engineering",
                 "Technical writing & knowledge sharing",
               ].map((item) => (
-                <li
-                  key={item}
-                  style={{
-                    display: "flex",
-                    gap: 10,
-                    alignItems: "flex-start",
-                    color: "var(--text-muted)",
-                    fontSize: 13,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  <span style={{ color: "var(--accent)", marginTop: 2, flexShrink: 0 }}>→</span>
+                <li key={item} className={styles.sideboxItem}>
+                  <span className={styles.sideboxIcon}>→</span>
                   {item}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div
-            style={{
-              border: "1px solid var(--border)",
-              padding: "28px",
-              backgroundColor: "var(--bg-2)",
-            }}
-          >
+          <div className={styles.sidebox}>
             <p
               style={{
                 fontFamily: "'DM Mono', monospace",
@@ -170,18 +129,8 @@ export default function AboutPage() {
                 "Work with a high-calibre product team",
                 "Lead architecture on a meaningful platform",
               ].map((item) => (
-                <li
-                  key={item}
-                  style={{
-                    display: "flex",
-                    gap: 10,
-                    alignItems: "flex-start",
-                    color: "var(--text-muted)",
-                    fontSize: 13,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  <span style={{ color: "var(--accent)", marginTop: 2, flexShrink: 0 }}>→</span>
+                <li key={item} className={styles.sideboxItem}>
+                  <span className={styles.sideboxIcon}>→</span>
                   {item}
                 </li>
               ))}
@@ -191,58 +140,18 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section
-        style={{
-          borderTop: "1px solid var(--border)",
-          borderBottom: "1px solid var(--border)",
-          backgroundColor: "var(--bg-2)",
-          padding: "80px 24px",
-        }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: 11,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
-              marginBottom: 48,
-            }}
-          >
+      <section className={styles.timelineSection}>
+        <div className={styles.timelineContainer}>
+          <p className={styles.timelineLabel}>
             Journey
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
             {timeline.map(({ year, event }, i) => (
-              <div
-                key={year}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "100px 1fr",
-                  gap: 32,
-                  paddingBottom: i < timeline.length - 1 ? 28 : 0,
-                  marginBottom: i < timeline.length - 1 ? 28 : 0,
-                  borderBottom: i < timeline.length - 1 ? "1px solid var(--border)" : "none",
-                  alignItems: "start",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "'DM Serif Display', serif",
-                    fontSize: 22,
-                    color: year === "Now" ? "var(--accent)" : "var(--text-subtle)",
-                    lineHeight: 1.3,
-                  }}
-                >
+              <div key={year} className={styles.timelineItem}>
+                <span className={`${styles.timelineYear} ${year === "Now" ? styles.timelineYearNow : styles.timelineYearPast}`}>
                   {year}
                 </span>
-                <p
-                  style={{
-                    color: "var(--text-muted)",
-                    fontSize: 14,
-                    lineHeight: 1.75,
-                  }}
-                >
+                <p className={styles.timelineEvent}>
                   {event}
                 </p>
               </div>
@@ -252,45 +161,19 @@ export default function AboutPage() {
       </section>
 
       {/* Tech Stack */}
-      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px" }}>
-        <p
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: 11,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "var(--text-muted)",
-            marginBottom: 48,
-          }}
-        >
+      <section className={styles.techStackSection}>
+        <p className={styles.techStackLabel}>
           Tech Stack
         </p>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 2,
-            backgroundColor: "var(--border)",
-            border: "1px solid var(--border)",
-          }}
-        >
+        <div className={styles.techStackGrid}>
           {Object.entries(techStack).map(([category, techs]) => (
-            <div key={category} style={{ backgroundColor: "var(--bg)", padding: "28px 24px" }}>
-              <p
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: 10,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  marginBottom: 16,
-                }}
-              >
+            <div key={category} className={styles.techStackItem}>
+              <p className={styles.techStackItemLabel}>
                 {category}
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <div className={styles.techStackItemTech}>
                 {techs.map((tech) => (
-                  <span key={tech} style={{ color: "var(--text-muted)", fontSize: 13 }}>
+                  <span key={tech}>
                     {tech}
                   </span>
                 ))}
@@ -301,32 +184,13 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <div
-        style={{
-          borderTop: "1px solid var(--border)",
-          padding: "48px 24px",
-          textAlign: "center",
-        }}
-      >
-        <p style={{ color: "var(--text-muted)", fontSize: 15, marginBottom: 24 }}>
+      <div className={styles.ctaSection}>
+        <p className={styles.ctaText}>
           Want to work together or just talk shop?
         </p>
         <Link
           href="/contact"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "12px 28px",
-            backgroundColor: "var(--accent)",
-            color: "var(--bg)",
-            textDecoration: "none",
-            fontSize: 13,
-            fontWeight: 500,
-            letterSpacing: "0.04em",
-            textTransform: "uppercase",
-            borderRadius: 2,
-          }}
+          className={styles.ctaButton}
         >
           Get in Touch <ArrowRight size={14} />
         </Link>

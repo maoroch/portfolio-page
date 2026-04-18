@@ -4,10 +4,10 @@ import { GitFork, Send, Link2, Mail, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 
 const contacts = [
-  { icon: Send, label: "Telegram", value: "@Ilyasdev", href: "https://t.me/Ilyasdev", desc: "Best for quick messages. Usually respond within a few hours." },
-  { icon: Link2, label: "LinkedIn", value: "Ilyas-dev", href: "https://linkedin.com/in/Ilyasdev", desc: "Professional background, work history, and recommendations." },
-  { icon: GitFork, label: "GitHub", value: "Ilyasdev", href: "https://github.com/Ilyasdev", desc: "Open source projects, contributions, and code style." },
-  { icon: Mail, label: "Email", value: "hello@Ilyas.dev", href: "mailto:hello@Ilyas.dev", desc: "For detailed proposals, NDA discussions, and formal inquiries." },
+  { icon: Send, label: "Telegram", value: "@Ilyas_ones", href: "https://t.me/Ilyas_ones", desc: "Best for quick messages. Usually respond within a few hours." },
+  { icon: Link2, label: "LinkedIn", value: "salimovilyass", href: "https://www.linkedin.com/in/salimovilyass", desc: "Professional background, work history, and recommendations." },
+  { icon: GitFork, label: "GitHub", value: "maoroch", href: "https://github.com/maoroch", desc: "Open source projects, contributions, and code style." },
+  { icon: Mail, label: "Email", value: "salimovilas46@gmail.com", href: "mailto:salimovilas46@gmail.com", desc: "For detailed proposals, NDA discussions, and formal inquiries." },
 ];
 
 function ContactCard({ icon: Icon, label, value, href, desc }: (typeof contacts)[0]) {
