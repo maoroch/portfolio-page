@@ -62,41 +62,49 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         }}
       >
         <div style={{ maxWidth: 740, margin: "0 auto" }}>
-          <Link
-            href="/articles"
+          <div
             style={{
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
-              gap: 6,
-              color: "var(--text-muted)",
-              textDecoration: "none",
-              fontSize: 12,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              fontFamily: "'DM Mono', monospace",
+              gap: 16,
               marginBottom: 40,
+              flexWrap: "wrap",
             }}
           >
-            <ArrowLeft size={13} /> All Articles
-          </Link>
+            <Link
+              href="/articles"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                color: "var(--text-muted)",
+                textDecoration: "none",
+                fontSize: 12,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                fontFamily: "'DM Mono', monospace",
+              }}
+            >
+              <ArrowLeft size={13} /> All Articles
+            </Link>
 
-          <span
-            style={{
-              display: "inline-block",
-              fontFamily: "'DM Mono', monospace",
-              fontSize: 10,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--accent)",
-              border: "1px solid var(--accent-dim)",
-              backgroundColor: "var(--accent-bg)",
-              padding: "3px 10px",
-              borderRadius: 2,
-              marginBottom: 20,
-            }}
-          >
-            {article.category}
-          </span>
+            <span
+              style={{
+                display: "inline-block",
+                fontFamily: "'DM Mono', monospace",
+                fontSize: 10,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "var(--accent)",
+                border: "1px solid var(--accent-dim)",
+                backgroundColor: "var(--accent-bg)",
+                padding: "3px 10px",
+                borderRadius: 2,
+              }}
+            >
+              {article.category}
+            </span>
+          </div>
 
           <h1
             style={{

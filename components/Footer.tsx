@@ -4,10 +4,10 @@ import { GitFork, Send, Link2, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const socials = [
-  { icon: GitFork, label: "GitHub", href: "https://github.com" },
-  { icon: Send, label: "Telegram", href: "https://t.me" },
-  { icon: Link2, label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: Mail, label: "Email", href: "mailto:hello@Ilyas.dev" },
+  { icon: GitFork, label: "GitHub", href: "https://github.com/maoroch" },
+  { icon: Send, label: "Telegram", href: "https://t.me/Ilyas_ones" },
+  { icon: Link2, label: "LinkedIn", href: "https://www.linkedin.com/in/salimovilyass" },
+  { icon: Mail, label: "Email", href: "mailto:salimovilas46@gmail.com" },
 ];
 
 const navLinks = [
