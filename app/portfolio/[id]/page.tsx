@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, GitFork } from "lucide-react";
+import { ArrowLeft, ExternalLink, GitFork, Link2 } from "lucide-react";
 import { getProjectById, getProjects } from "@/lib/data";
+import styles from "./project-detail.module.css";
+
 
 export async function generateStaticParams() {
   const projects = getProjects();
@@ -20,12 +22,26 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const project = getProjectById(id);
   if (!project) notFound();
 
-  const sections = [
-    { label: "Problem", content: project.problem },
-    { label: "Solution", content: project.solution },
-    { label: "Architecture", content: project.architecture },
-    { label: "Result", content: project.result },
-  ];
+  // sections: обычные текстовые секции + видео как отдельный объект
+  const p = project as any;
+const rawSections = [
+  { label: "Problem", content: p.problem },
+  { label: "Solution", content: p.solution },
+  { label: "Architecture", content: p.architecture },
+  { label: "Result", content: p.result },
+  { label: "Video demo", content: p.video ?? null, type: p.video ? "media" : undefined },
+];
+
+  
+
+  const sections = rawSections.filter(section => {
+  // Если это секция Video и content отсутствует (или type не "media") — пропускаем
+  if (section.label === "Video" && (!section.content || section.type !== "media")) {
+    return false;
+  }
+  return true;
+});
+
 
   return (
     <div style={{ paddingTop: 70 }}>
@@ -166,7 +182,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(40px, 8vw, 64px) 16px 60px", display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 280px)", gap: "clamp(40px, 8vw, 64px)", alignItems: "start" }}>
         {/* Main */}
         <div>
-          {sections.map(({ label, content }, i) => (
+          {sections.map(({ label, content, type }, i) => (
             <div
               key={label}
               style={{
@@ -187,11 +203,30 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               >
                 {label}
               </p>
-              <p style={{ color: "var(--text-muted)", fontSize: "clamp(13px, 3vw, 15px)", lineHeight: 1.8 }}>
-                {content}
-              </p>
+    {type === "media" ? (
+      <video controls style={{ width: '100%', borderRadius: 8 }}>
+        <source src={content as string} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    ) : (
+      <p style={{ color: "var(--text-muted)", fontSize: "clamp(13px, 3vw, 15px)", lineHeight: 1.8 }}>
+        {content}
+      </p>
+    )}
+
             </div>
           ))}
+            <div className={styles.timelineDisclaimer}>
+              <Link2 size={14} color="var(--accent)" />
+              <a 
+                href="https://www.linkedin.com/in/salimovilyass" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.timelineDisclaimerLink}
+              >
+                <i>Learn more</i>
+              </a>
+            </div>
         </div>
 
         {/* Sidebar - responsive */}

@@ -148,3 +148,21 @@ main {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Grid paper hero background */
+/* Grid paper hero background */
+.hero-grid-bg {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  height: 100vh; /* только зона обложки */
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.343) 0%, transparent 65%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 65%);
+}

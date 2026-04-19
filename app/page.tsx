@@ -16,9 +16,13 @@ export default function HomePage() {
   const articles = getFeaturedArticles();
 
   return (
-    <div style={{ paddingTop: 60 }}>
+    <div style={{ paddingTop: 60, position: "relative" }}>
+          
+    <div className="hero-grid-bg" />
+
+
       {/* Hero */}
-      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 24px 80px" }}>
+      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "100px 24px 80px", position: "relative", zIndex: 1 }}>
         <div className="animate-fade-up delay-1">
           <span style={{ display: "inline-block", fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", border: "1px solid var(--accent-dim)", backgroundColor: "var(--accent-bg)", padding: "4px 12px", borderRadius: 2, marginBottom: 32 }}>
             Available for projects
@@ -50,7 +54,7 @@ export default function HomePage() {
       </section>
 
       {/* Skills */}
-      <section style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", backgroundColor: "var(--bg-2)", padding: "80px 24px" }}>
+      <section style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", backgroundColor: "var(--bg-2)", padding: "80px 24px", zIndex: 1, position: "relative" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 48 }}>Focus Areas</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 1, backgroundColor: "var(--border)", border: "1px solid var(--border)" }}>
