@@ -34,11 +34,13 @@ const rawSections = [
 
   
 
-  const sections = rawSections.filter(section => {
-  // Если это секция Video и content отсутствует (или type не "media") — пропускаем
-  if (section.label === "Video" && (!section.content || section.type !== "media")) {
-    return false;
-  }
+const sections = rawSections.filter(section => {
+  // Секция без content — не показываем
+  if (!section.content) return false;
+  // Для секции Video дополнительно проверяем тип
+  if (section.label === "Video demo" && section.type !== "media") return false;
+  // Для GitHub проверяем тип link (можно и без проверки типа, но оставим)
+  if (section.label === "GitHub" && section.type !== "link") return false;
   return true;
 });
 
@@ -203,30 +205,24 @@ const rawSections = [
               >
                 {label}
               </p>
-    {type === "media" ? (
-      <video controls style={{ width: '100%', borderRadius: 8 }}>
-        <source src={content as string} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    ) : (
-      <p style={{ color: "var(--text-muted)", fontSize: "clamp(13px, 3vw, 15px)", lineHeight: 1.8 }}>
-        {content}
-      </p>
-    )}
+{type === "media" ? (
+  <video controls style={{ width: '100%', borderRadius: 8 }}>
+    <source src={content as string} type="video/mp4" />
+  </video>
+) : type === "link" ? (
+  <a href={content} target="_blank" rel="noopener noreferrer"
+     style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--accent)" }}>
+    <GitFork size={14} /> {content}
+  </a>
+) : (
+  <p
+    style={{ color: "var(--text-muted)", fontSize: "clamp(13px, 3vw, 15px)", lineHeight: 1.8 }}
+    dangerouslySetInnerHTML={{ __html: content as string }}
+  />
+)}
 
             </div>
           ))}
-            <div className={styles.timelineDisclaimer}>
-              <Link2 size={14} color="var(--accent)" />
-              <a 
-                href="https://www.linkedin.com/in/salimovilyass" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.timelineDisclaimerLink}
-              >
-                <i>Learn more</i>
-              </a>
-            </div>
         </div>
 
         {/* Sidebar - responsive */}
