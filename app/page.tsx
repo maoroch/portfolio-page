@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Zap, Database, Bot, Layers } from "lucide-react";
 import { getFeaturedProjects, getFeaturedArticles } from "@/lib/data";
 import ProjectCard from "@/components/ProjectCard";
-import ArticleCard from "@/components/ArticleCard";
+import ArticleCardHome from "@/components/ArticleCard";
+import HomeAbout from "@/components/HomeAbout";
 
 const skills = [
   { icon: Layers, title: "Product Architecture", desc: "Designing systems that scale — from data models to API contracts to frontend rendering strategies." },
@@ -53,6 +54,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* About — photo + bio */}
+      <div className="flex justify-between" style={{ borderTop: "1px solid var(--border)" }}>
+        <HomeAbout />
+      </div>
+
       {/* Skills */}
       <section style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", backgroundColor: "var(--bg-2)", padding: "80px 24px", zIndex: 1, position: "relative" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -99,8 +105,8 @@ export default function HomePage() {
               All Articles <ArrowRight size={14} />
             </Link>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 2, backgroundColor: "var(--border)" }}>
-            {articles.map((article) => <ArticleCard key={article.id} article={article} />)}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 32 }}>
+            {articles.map((article) => <ArticleCardHome key={article.id} article={article} />)}
           </div>
         </div>
       </section>
