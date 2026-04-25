@@ -1,0 +1,35 @@
+@startuml
+title Decision Tree: Choosing a Rendering Strategy
+
+start
+
+:Is the content user-specific?;
+
+if (Yes) then (Yes)
+  :Use **SSR** (Server-Side Rendering);
+  note right
+    Examples: Cart, auth-gated pages,
+    real-time feeds
+  end note
+  stop
+else (No)
+  :Can I tolerate N seconds of staleness?;
+  if (No) then (No)
+    :Use **SSR**;
+    note right: Must be always fresh
+    stop
+  else (Yes)
+    :Does the content ever change?;
+    if (Never changes) then (Never)
+      :Use **SSG** (Static Generation);
+      note right: Built once at deploy time
+      stop
+    else (Changes)
+      :Use **ISR** (Incremental Static Regeneration);
+      note right: revalidate: N seconds
+      stop
+    endif
+  endif
+endif
+
+@enduml

@@ -88,15 +88,7 @@ export default function ArticlesPage() {
                 />
               </div>
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-                  gap: 2,
-                  backgroundColor: "var(--border)",
-                  border: "1px solid var(--border)",
-                }}
-              >
+              <div>
                 {categoryArticles.map((article) => (
                   <ArticleCard key={article.id} article={article} />
                 ))}

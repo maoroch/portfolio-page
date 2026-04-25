@@ -24,6 +24,7 @@ export interface Article {
   category: string;
   tags: string[];
   readingTime: number;
+  image?: string;
   publishedAt: string;
   featured: boolean;
   slug: string;

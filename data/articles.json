@@ -9,6 +9,7 @@
     "tags": ["Next.js", "SSR", "ISR", "Caching", "Performance"],
     "readingTime": 7,
     "publishedAt": "2024-11-12",
+    "image": "/images/articles/SSR + Caching Strategy.png",
     "featured": true
   },
   {
