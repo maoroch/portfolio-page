@@ -55,7 +55,7 @@ export default function HomePage() {
       </section>
 
       {/* About — photo + bio */}
-      <div className="flex justify-between" style={{ borderTop: "1px solid var(--border)" }}>
+      <div className="flex justify-between" style={{ borderTop: "1px solid var(--border)", backgroundColor: "var(--bg-1)", padding: "80px 24px", position: "relative", zIndex: 1 }}>
         <HomeAbout />
       </div>
 
