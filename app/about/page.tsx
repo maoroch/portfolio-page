@@ -179,7 +179,9 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
-            <div className={styles.timelineDisclaimer}>
+
+{ /*
+          <div className={styles.timelineDisclaimer}>
               <Link2 size={14} color="var(--accent)" />
               <a 
                 href="https://www.linkedin.com/in/salimovilyass" 
@@ -189,7 +191,9 @@ export default function AboutPage() {
               >
                 <i>For detailed work history and recommendations — see <b>LinkedIn</b>.</i>
               </a>
-            </div>
+          </div>
+*/ }
+
           </div>
         </div>
       </section>
@@ -223,7 +227,7 @@ export default function AboutPage() {
           Have a project in mind or want to discuss an idea?
         </p>
         <Link
-          href="/contact"
+          href="https://www.upwork.com/freelancers/salimovilyas"
           className={styles.ctaButton}
         >
           Get in Touch <ArrowRight size={14} />

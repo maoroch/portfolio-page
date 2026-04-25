@@ -78,7 +78,7 @@
   "result": "<strong>Lighthouse Performance 94 / SEO 100</strong> on static product pages. LCP under 2.5s. Complete e-commerce lifecycle — catalog, filtering, product detail, <strong>reviews, checkout, order confirmation, order history</strong>, blog, discounts with coupons, wishlist, forgot password. <strong>Zero PHP knowledge required</strong> to customise the storefront — pure TypeScript/React. WooCommerce admin remains fully functional for content editors. Guest and authenticated checkout both supported — orders linked to customer account when JWT is present.",
   "github": "https://github.com/maoroch/headless-commerce-platform",
   "video": null,
-  "category": "ecommerce",
+  "category": "e-commerce",
   "featured": true,
   "year": 2025,
   "tags": [

@@ -39,7 +39,7 @@ export default function HomePage() {
           <Link href="/portfolio" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", backgroundColor: "var(--accent)", color: "var(--bg)", textDecoration: "none", fontSize: 13, fontWeight: 500, letterSpacing: "0.04em", textTransform: "uppercase", borderRadius: 2 }}>
             View Work <ArrowRight size={14} />
           </Link>
-          <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", border: "1px solid var(--border-light)", color: "var(--text-muted)", textDecoration: "none", fontSize: 13, letterSpacing: "0.04em", textTransform: "uppercase", borderRadius: 2 }}>
+          <Link href="https://www.upwork.com/freelancers/salimovilyas" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", border: "1px solid var(--border-light)", color: "var(--text-muted)", textDecoration: "none", fontSize: 13, letterSpacing: "0.04em", textTransform: "uppercase", borderRadius: 2 }}>
             Get in Touch
           </Link>
         </div>
@@ -112,7 +112,7 @@ export default function HomePage() {
           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", marginBottom: 16 }}>Open to work</p>
           <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(28px, 4vw, 48px)", color: "var(--text)", marginBottom: 16, letterSpacing: "-0.02em" }}>Got a project in mind?</h2>
           <p style={{ color: "var(--text-muted)", fontSize: 15, maxWidth: 400, margin: "0 auto 36px" }}>I&apos;m available for freelance projects, consulting, and long-term collaboration.</p>
-          <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 32px", backgroundColor: "var(--accent)", color: "var(--bg)", textDecoration: "none", fontSize: 13, fontWeight: 500, letterSpacing: "0.04em", textTransform: "uppercase", borderRadius: 2 }}>
+          <Link href="https://www.upwork.com/freelancers/salimovilyas" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "14px 32px", backgroundColor: "var(--accent)", color: "var(--bg)", textDecoration: "none", fontSize: 13, fontWeight: 500, letterSpacing: "0.04em", textTransform: "uppercase", borderRadius: 2 }}>
             Let&apos;s Talk <ArrowRight size={14} />
           </Link>
         </div>
