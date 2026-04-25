@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getArticleBySlug, getArticles } from "@/lib/data";
-import Image from "next/image";
 
 export async function generateStaticParams() {
   const articles = getArticles();
@@ -25,12 +24,12 @@ function renderMarkdown(content: string): string {
     })
     // Inline code
     .replace(/`([^`]+)`/g, `<code style="font-family:'DM Mono',monospace;font-size:12px;background:var(--bg-3);border:1px solid var(--border);padding:2px 6px;border-radius:2px;color:var(--accent);">$1</code>`)
-    // H1 → H2 (чтобы не дублировать заголовок страницы)
-    .replace(/^# (.+)$/gm, `<h2 style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--text);letter-spacing:-0.01em;margin:48px 0 24px;line-height:1.2;">$1</h2>`)
+    // H1
+    .replace(/^# (.+)$/gm, `<h1 style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--text);letter-spacing:-0.02em;margin:48px 0 24px;line-height:1.2;">$1</h1>`)
     // H2
-    .replace(/^## (.+)$/gm, `<h3 style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--text);letter-spacing:-0.01em;margin:40px 0 16px;line-height:1.3;padding-top:8px;border-top:1px solid var(--border);">$1</h3>`)
+    .replace(/^## (.+)$/gm, `<h2 style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--text);letter-spacing:-0.01em;margin:40px 0 16px;line-height:1.3;padding-top:8px;border-top:1px solid var(--border);">$1</h2>`)
     // H3
-    .replace(/^### (.+)$/gm, `<h4 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--text);margin:32px 0 12px;line-height:1.3;">$1</h4>`)
+    .replace(/^### (.+)$/gm, `<h3 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--text);margin:32px 0 12px;line-height:1.3;">$1</h3>`)
     // Bold
     .replace(/\*\*(.+?)\*\*/g, `<strong style="color:var(--text);font-weight:500;">$1</strong>`)
     // Paragraphs (non-empty lines not starting with <)
@@ -160,34 +159,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* Article content with image above markdown */}
+      {/* Article content */}
       <section style={{ maxWidth: 740, margin: "0 auto", padding: "56px 24px 80px" }}>
-        {/* Изображение, если есть */}  
-        {article.image && (
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              height: "clamp(200px, 40vw, 400px)",
-              marginBottom: 48,
-              overflow: "hidden",
-              borderRadius: 4,
-              backgroundColor: "var(--bg-2)",
-            }}
-          >
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 740px"
-              style={{
-                objectFit: "cover",
-              }}
-            />
-          </div>
-        )}
-
-        {/* Markdown контент */}
         <div
           dangerouslySetInnerHTML={{ __html: html }}
           style={{ maxWidth: "100%" }}

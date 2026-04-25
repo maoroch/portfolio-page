@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function ArticlesPage() {
   const articles = getArticles();
-
   const categories = Array.from(new Set(articles.map((a) => a.category)));
 
   return (
     <div style={{ paddingTop: 60 }}>
+      {/* Hero header — не меняем */}
       <section style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px 64px" }}>
         <p
           style={{
@@ -51,24 +51,25 @@ export default function ArticlesPage() {
       </section>
 
       {/* Articles by category */}
-      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 80px" }}>
-        {categories.map((category) => {
+      <section style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px 100px" }}>
+        {categories.map((category, i) => {
           const categoryArticles = articles.filter((a) => a.category === category);
           return (
-            <div key={category} style={{ marginBottom: 64 }}>
+            <div key={category} style={{ marginBottom: 72 }}>
+              {/* Category label */}
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   gap: 16,
-                  marginBottom: 24,
+                  marginBottom: 0,
                 }}
               >
                 <span
                   style={{
                     fontFamily: "'DM Mono', monospace",
-                    fontSize: 11,
-                    letterSpacing: "0.1em",
+                    fontSize: 10,
+                    letterSpacing: "0.12em",
                     textTransform: "uppercase",
                     color: "var(--accent)",
                     border: "1px solid var(--accent-dim)",
@@ -88,6 +89,7 @@ export default function ArticlesPage() {
                 />
               </div>
 
+              {/* Article list */}
               <div>
                 {categoryArticles.map((article) => (
                   <ArticleCard key={article.id} article={article} />

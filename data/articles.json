@@ -9,7 +9,6 @@
     "tags": ["Next.js", "SSR", "ISR", "Caching", "Performance"],
     "readingTime": 7,
     "publishedAt": "2024-11-12",
-    "image": "/images/articles/SSR + Caching Strategy.png",
     "featured": true
   },
   {
@@ -22,7 +21,6 @@
     "tags": ["CRM", "PostgreSQL", "Data Modeling", "Architecture", "SQL"],
     "readingTime": 9,
     "publishedAt": "2024-10-28",
-    "image": "/images/articles/CRM Data Model.png",
     "featured": true
   }
 ]

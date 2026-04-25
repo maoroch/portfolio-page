@@ -2,303 +2,174 @@
 
 import Link from "next/link";
 import { Clock, ArrowUpRight } from "lucide-react";
-import { Article } from "@/types";
-import { useState, useEffect } from "react";
-import Image from "next/image";
+
+interface Article {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  publishedAt: string;
+  readingTime: number;
+  tags: string[];
+  image?: string;
+}
 
 export default function ArticleCard({ article }: { article: Article }) {
-  const [hovered, setHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const date = new Date(article.publishedAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
 
-  // На мобильных: сначала изображение, потом текст.
-  // На десктопе: слева текст, справа изображение.
   return (
-    <Link
-      href={`/articles/${article.slug}`}
-      style={{ textDecoration: "none", display: "block" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <Link href={`/articles/${article.slug}`} style={{ textDecoration: "none" }}>
       <article
         style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: "stretch",
-          backgroundColor: hovered ? "var(--bg-3)" : "var(--bg-2)",
-          transition: "background-color 0.2s",
+          display: "grid",
+          gridTemplateColumns: "1fr auto",
+          alignItems: "start",
+          gap: "24px 40px",
+          padding: "28px 0",
+          borderBottom: "1px solid var(--border)",
           cursor: "pointer",
-          minHeight: isMobile ? "auto" : 280,
+          position: "relative",
+          transition: "all 0.2s ease",
         }}
+        className="article-card-row"
       >
-        {isMobile ? (
-          // Мобильная версия: сначала изображение, потом текст
-          <>
-            {/* Изображение сверху */}
-            <div
+        {/* Left: content */}
+        <div style={{ minWidth: 0 }}>
+          {/* Meta row */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              marginBottom: 10,
+            }}
+          >
+            <span
               style={{
-                position: "relative",
-                overflow: "hidden",
-                backgroundColor: "#E8DFD5",
-                minHeight: 200,
-                width: "100%",
+                fontFamily: "'DM Mono', monospace",
+                fontSize: 10,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--text-subtle)",
               }}
             >
-              {article.image && (
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  fill
-                  sizes="100vw"
-                  style={{
-                    objectFit: "cover",
-                    transition: "transform 0.4s ease",
-                    transform: hovered ? "scale(1.03)" : "scale(1)",
-                  }}
-                />
-              )}
-            </div>
-
-            {/* Текстовый блок снизу */}
-            <div
+              {date}
+            </span>
+            <span
               style={{
-                padding: "28px 20px",
+                width: 3,
+                height: 3,
+                borderRadius: "50%",
+                backgroundColor: "var(--border-light)",
+                flexShrink: 0,
+              }}
+            />
+            <span
+              style={{
                 display: "flex",
-                flexDirection: "column",
+                alignItems: "center",
+                gap: 5,
+                fontFamily: "'DM Mono', monospace",
+                fontSize: 10,
+                letterSpacing: "0.08em",
+                color: "var(--text-subtle)",
               }}
             >
-              <div
+              <Clock size={10} />
+              {article.readingTime} min
+            </span>
+          </div>
+
+          {/* Title */}
+          <h2
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: "clamp(17px, 2.2vw, 22px)",
+              color: "var(--text)",
+              letterSpacing: "-0.01em",
+              lineHeight: 1.3,
+              marginBottom: 10,
+              transition: "color 0.2s ease",
+            }}
+            className="article-card-title"
+          >
+            {article.title}
+          </h2>
+
+          {/* Excerpt */}
+          <p
+            style={{
+              fontSize: 14,
+              color: "var(--text-muted)",
+              lineHeight: 1.65,
+              marginBottom: 16,
+              maxWidth: 560,
+            }}
+          >
+            {article.excerpt}
+          </p>
+
+          {/* Tags */}
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {article.tags.slice(0, 3).map((tag) => (
+              <span
+                key={tag}
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  marginBottom: 16,
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: 10,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "var(--text-subtle)",
+                  border: "1px solid var(--border)",
+                  padding: "2px 8px",
+                  borderRadius: 2,
+                  backgroundColor: "var(--bg-2)",
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: 10,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "var(--accent)",
-                    border: "1px solid var(--accent-dim)",
-                    backgroundColor: "var(--accent-bg)",
-                    padding: "2px 8px",
-                    borderRadius: 2,
-                  }}
-                >
-                  {article.category}
-                </span>
-                <ArrowUpRight
-                  size={14}
-                  color={hovered ? "var(--accent)" : "var(--text-subtle)"}
-                  style={{ transition: "color 0.2s", flexShrink: 0 }}
-                />
-              </div>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
 
-              <h3
-                style={{
-                  fontFamily: "'DM Serif Display', serif",
-                  fontSize: 20,
-                  color: "var(--text)",
-                  marginBottom: 12,
-                  lineHeight: 1.3,
-                  letterSpacing: "-0.01em",
-                  flex: 1,
-                }}
-              >
-                {article.title}
-              </h3>
-
-              <p
-                style={{
-                  color: "var(--text-muted)",
-                  fontSize: 13,
-                  lineHeight: 1.65,
-                  marginBottom: 24,
-                }}
-              >
-                {article.excerpt}
-              </p>
-
-              <div style={{ display: "flex", gap: 16, alignItems: "center", marginTop: "auto" }}>
-                <span style={{ color: "var(--text-muted)", fontSize: 12 }}>{date}</span>
-                <span
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                    color: "var(--text-subtle)",
-                    fontSize: 12,
-                  }}
-                >
-                  <Clock size={11} />
-                  {article.readingTime} min read
-                </span>
-              </div>
-
-              <div style={{ display: "flex", gap: 6, marginTop: 16, flexWrap: "wrap" }}>
-                {article.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: 10,
-                      color: "var(--text-subtle)",
-                      border: "1px solid var(--border)",
-                      padding: "1px 6px",
-                      borderRadius: 2,
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </>
-        ) : (
-          // Десктопная версия: текст слева (1/3), изображение справа (2/3)
-          <>
-            {/* Текст — левая колонка */}
-            <div
-              style={{
-                flex: 1,
-                padding: "32px 28px",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  marginBottom: 16,
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: 10,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "var(--accent)",
-                    border: "1px solid var(--accent-dim)",
-                    backgroundColor: "var(--accent-bg)",
-                    padding: "2px 8px",
-                    borderRadius: 2,
-                  }}
-                >
-                  {article.category}
-                </span>
-                <ArrowUpRight
-                  size={14}
-                  color={hovered ? "var(--accent)" : "var(--text-subtle)"}
-                  style={{ transition: "color 0.2s", flexShrink: 0 }}
-                />
-              </div>
-
-              <h3
-                style={{
-                  fontFamily: "'DM Serif Display', serif",
-                  fontSize: 20,
-                  color: "var(--text)",
-                  marginBottom: 12,
-                  lineHeight: 1.3,
-                  letterSpacing: "-0.01em",
-                  flex: 1,
-                }}
-              >
-                {article.title}
-              </h3>
-
-              <p
-                style={{
-                  color: "var(--text-muted)",
-                  fontSize: 13,
-                  lineHeight: 1.65,
-                  marginBottom: 24,
-                }}
-              >
-                {article.excerpt}
-              </p>
-
-              <div style={{ display: "flex", gap: 16, alignItems: "center", marginTop: "auto" }}>
-                <span style={{ color: "var(--text-muted)", fontSize: 12 }}>{date}</span>
-                <span
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                    color: "var(--text-subtle)",
-                    fontSize: 12,
-                  }}
-                >
-                  <Clock size={11} />
-                  {article.readingTime} min read
-                </span>
-              </div>
-
-              <div style={{ display: "flex", gap: 6, marginTop: 16, flexWrap: "wrap" }}>
-                {article.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: 10,
-                      color: "var(--text-subtle)",
-                      border: "1px solid var(--border)",
-                      padding: "1px 6px",
-                      borderRadius: 2,
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Изображение — правая колонка */}
-            <div
-              style={{
-                flex: 2,
-                position: "relative",
-                overflow: "hidden",
-                backgroundColor: "#E8DFD5",
-              }}
-            >
-              {article.image && (
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  fill
-                  sizes="66vw"
-                  style={{
-                    objectFit: "cover",
-                    transition: "transform 0.4s ease",
-                    transform: hovered ? "scale(1.03)" : "scale(1)",
-                  }}
-                />
-              )}
-            </div>
-          </>
-        )}
+        {/* Right: arrow */}
+        <div
+          style={{
+            width: 36,
+            height: 36,
+            border: "1px solid var(--border)",
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            marginTop: 28,
+            transition: "all 0.2s ease",
+            backgroundColor: "transparent",
+          }}
+          className="article-card-arrow"
+        >
+          <ArrowUpRight size={14} color="var(--text-muted)" />
+        </div>
       </article>
+
+      <style jsx>{`
+        .article-card-row:hover .article-card-title {
+          color: var(--accent) !important;
+        }
+        .article-card-row:hover .article-card-arrow {
+          background-color: var(--accent-bg) !important;
+          border-color: var(--accent-dim) !important;
+        }
+        .article-card-row:first-of-type {
+          border-top: 1px solid var(--border);
+        }
+      `}</style>
     </Link>
   );
 }
