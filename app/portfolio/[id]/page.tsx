@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, GitFork, Link2 } from "lucide-react";
+import { ArrowLeft, ExternalLink, GitFork } from "lucide-react";
 import { getProjectById, getProjects } from "@/lib/data";
-import styles from "./project-detail.module.css";
-
 
 export async function generateStaticParams() {
   const projects = getProjects();
@@ -22,40 +20,88 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const project = getProjectById(id);
   if (!project) notFound();
 
-  // sections: обычные текстовые секции + видео как отдельный объект
   const p = project as any;
-const rawSections = [
-  { label: "Problem", content: p.problem },
-  { label: "Solution", content: p.solution },
-  { label: "Architecture", content: p.architecture },
-  { label: "Result", content: p.result },
-  { label: "Video demo", content: p.video ?? null, type: p.video ? "media" : undefined },
-];
+  const rawSections = [
+    { label: "Problem", content: p.problem },
+    { label: "Solution", content: p.solution },
+    { label: "Architecture", content: p.architecture },
+    { label: "Result", content: p.result },
+    { label: "Video demo", content: p.video ?? null, type: p.video ? "media" : undefined },
+  ];
 
-  
-
-const sections = rawSections.filter(section => {
-  // Секция без content — не показываем
-  if (!section.content) return false;
-  // Для секции Video дополнительно проверяем тип
-  if (section.label === "Video demo" && section.type !== "media") return false;
-  // Для GitHub проверяем тип link (можно и без проверки типа, но оставим)
-  if (section.label === "GitHub" && section.type !== "link") return false;
-  return true;
-});
-
+  const sections = rawSections.filter((section) => {
+    if (!section.content) return false;
+    if (section.label === "Video demo" && section.type !== "media") return false;
+    if (section.label === "GitHub" && section.type !== "link") return false;
+    return true;
+  });
 
   return (
     <div style={{ paddingTop: 70 }}>
+      <style>{`
+        .project-grid-container {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+          gap: clamp(40px, 8vw, 64px);
+          align-items: start;
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: clamp(40px, 8vw, 64px) 16px 60px;
+        }
+        .project-sidebar {
+          position: sticky;
+          top: clamp(90px, 10vw, 120px);
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        /* На мобильных: сайдбар идёт ПЕРВЫМ (order), затем контент */
+        @media (max-width: 768px) {
+          .project-grid-container {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .project-sidebar {
+            position: static;
+            top: auto;
+            order: -1;
+          }
+          .project-header-inner {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+          .project-title {
+            font-size: clamp(24px, 7vw, 40px) !important;
+          }
+          .project-actions {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .project-actions a {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+        @media (max-width: 480px) {
+          .project-grid-container {
+            padding-left: 12px;
+            padding-right: 12px;
+          }
+        }
+      `}</style>
+
       {/* Header */}
       <section
         style={{
           borderBottom: "1px solid var(--border)",
           backgroundColor: "var(--bg-2)",
-          padding: "clamp(48px, 10vw, 64px) 16px 32px",
+          padding: "clamp(48px, 10vw, 64px) 0 32px",
         }}
       >
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div
+          className="project-header-inner"
+          style={{ maxWidth: 1100, margin: "0 auto", padding: "0 16px" }}
+        >
           <Link
             href="/portfolio"
             style={{
@@ -74,7 +120,15 @@ const sections = rawSections.filter(section => {
             <ArrowLeft size={13} /> Back to Portfolio
           </Link>
 
-          <div style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 20, flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 10,
+              alignItems: "center",
+              marginBottom: 20,
+              flexWrap: "wrap",
+            }}
+          >
             <span
               style={{
                 fontFamily: "'DM Mono', monospace",
@@ -102,6 +156,7 @@ const sections = rawSections.filter(section => {
           </div>
 
           <h1
+            className="project-title"
             style={{
               fontFamily: "'DM Serif Display', serif",
               fontSize: "clamp(28px, 6vw, 56px)",
@@ -114,6 +169,7 @@ const sections = rawSections.filter(section => {
           >
             {project.title}
           </h1>
+
           <p
             style={{
               color: "var(--text-muted)",
@@ -126,7 +182,10 @@ const sections = rawSections.filter(section => {
             {project.subtitle}
           </p>
 
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "flex-start" }}>
+          <div
+            className="project-actions"
+            style={{ display: "flex", gap: 12, flexWrap: "wrap" }}
+          >
             {project.link && (
               <a
                 href={project.link}
@@ -135,6 +194,7 @@ const sections = rawSections.filter(section => {
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: 6,
                   padding: "10px 18px",
                   backgroundColor: "var(--accent)",
@@ -145,7 +205,6 @@ const sections = rawSections.filter(section => {
                   letterSpacing: "0.06em",
                   textTransform: "uppercase",
                   borderRadius: 2,
-                  transition: "all 0.2s",
                   minHeight: 44,
                 }}
               >
@@ -160,6 +219,7 @@ const sections = rawSections.filter(section => {
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: 6,
                   padding: "10px 18px",
                   border: "1px solid var(--border-light)",
@@ -169,7 +229,6 @@ const sections = rawSections.filter(section => {
                   letterSpacing: "0.06em",
                   textTransform: "uppercase",
                   borderRadius: 2,
-                  transition: "all 0.2s",
                   minHeight: 44,
                 }}
               >
@@ -180,9 +239,9 @@ const sections = rawSections.filter(section => {
         </div>
       </section>
 
-      {/* Content */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(40px, 8vw, 64px) 16px 60px", display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 280px)", gap: "clamp(40px, 8vw, 64px)", alignItems: "start" }}>
-        {/* Main */}
+      {/* Content grid */}
+      <div className="project-grid-container">
+        {/* Main content */}
         <div>
           {sections.map(({ label, content, type }, i) => (
             <div
@@ -190,7 +249,8 @@ const sections = rawSections.filter(section => {
               style={{
                 paddingBottom: "clamp(32px, 5vw, 40px)",
                 marginBottom: "clamp(32px, 5vw, 40px)",
-                borderBottom: i < sections.length - 1 ? "1px solid var(--border)" : "none",
+                borderBottom:
+                  i < sections.length - 1 ? "1px solid var(--border)" : "none",
               }}
             >
               <p
@@ -205,28 +265,44 @@ const sections = rawSections.filter(section => {
               >
                 {label}
               </p>
-{type === "media" ? (
-  <video controls style={{ width: '100%', borderRadius: 8 }}>
-    <source src={content as string} type="video/mp4" />
-  </video>
-) : type === "link" ? (
-  <a href={content} target="_blank" rel="noopener noreferrer"
-     style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--accent)" }}>
-    <GitFork size={14} /> {content}
-  </a>
-) : (
-  <p
-    style={{ color: "var(--text-muted)", fontSize: "clamp(13px, 3vw, 15px)", lineHeight: 1.8 }}
-    dangerouslySetInnerHTML={{ __html: content as string }}
-  />
-)}
 
+              {type === "media" ? (
+                <video
+                  controls
+                  style={{ width: "100%", borderRadius: 8 }}
+                >
+                  <source src={content as string} type="video/mp4" />
+                </video>
+              ) : type === "link" ? (
+                <a
+                  href={content as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    color: "var(--accent)",
+                  }}
+                >
+                  <GitFork size={14} /> {content}
+                </a>
+              ) : (
+                <p
+                  style={{
+                    color: "var(--text-muted)",
+                    fontSize: "clamp(13px, 3vw, 15px)",
+                    lineHeight: 1.8,
+                  }}
+                  dangerouslySetInnerHTML={{ __html: content as string }}
+                />
+              )}
             </div>
           ))}
         </div>
 
-        {/* Sidebar - responsive */}
-        <aside style={{ position: "sticky", top: "clamp(90px, 10vw, 120px)", display: "flex", flexDirection: "column", gap: 2 }}>
+        {/* Sidebar */}
+        <aside className="project-sidebar">
           {/* Stack */}
           <div
             style={{
@@ -272,6 +348,7 @@ const sections = rawSections.filter(section => {
               border: "1px solid var(--border)",
               padding: "clamp(16px, 4vw, 24px)",
               backgroundColor: "var(--bg-2)",
+              marginTop: 2,
             }}
           >
             <p
@@ -328,7 +405,6 @@ const sections = rawSections.filter(section => {
             letterSpacing: "0.06em",
             textTransform: "uppercase",
             fontFamily: "'DM Mono', monospace",
-            transition: "color 0.2s",
           }}
         >
           <ArrowLeft size={13} /> All Projects

@@ -27,3 +27,33 @@
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
+
+        .project-grid-container {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+          gap: clamp(40px, 8vw, 64px);
+          align-items: start;
+        }
+        .project-sidebar {
+          position: sticky;
+          top: clamp(90px, 10vw, 120px);
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        @media (max-width: 768px) {
+          .project-grid-container {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .project-sidebar {
+            position: static;
+            top: auto;
+          }
+        }
+        @media (max-width: 480px) {
+          .project-grid-container {
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+        }
